@@ -1,6 +1,6 @@
 class Pilha:
     def __init__(self, lista=None):
-        self.pilha = ['-'] if lista is None else lista
+        self.pilha = ['-'] if lista is None else lista.copy()
 
     def copy(self):
         return Pilha(self.pilha.copy())     
