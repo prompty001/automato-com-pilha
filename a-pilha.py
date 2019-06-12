@@ -5,15 +5,13 @@ class Pilha:
     def empilha(self, n):
         if self.pilha[-1] == '-':
             self.pilha[-1] = n
-        else:
-            self.pilha.append(n)
+        else: self.pilha.append(n)
             
     def desempilha(self):
         if len(self.pilha) == 1:
             if self.pilha[0] != '-':
                 self.pilha[0] = '-'
-        else:  
-            del self.pilha[-1]
+        else: del self.pilha[-1]
 
 class Automato:
     def __init__(self):
@@ -96,8 +94,7 @@ class Automato:
                 
                 yield from self.analisar(regra.estadoFinal, novaPalavra, novaPilha)
                                         
-        if not flag:
-            yield False
+        if not flag: yield False
             
     def verifica(self, palavra):
         for res in self.analisar('q0', palavra):
@@ -124,5 +121,4 @@ def main():
             if a.verifica(palavra): print("A palavra {} foi aceita.".format(palavra))
             else: print("A palavra {} foi recusada.".format(palavra))
 
-if __name__ == '__main__':
-    main()
+if __name__ == '__main__': main()
