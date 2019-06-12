@@ -1,5 +1,5 @@
 # Autômato com Pilha
-Trabalho da disciplina de Linguagens Formais, Autômatos e Computabilidade, fazendo a simulação de um autômato com pilha de uma linguagem livre de contexto.
+Implementação de software para carregar e processar Autômato com Pilha
 
 ## Atividade proposta
 
