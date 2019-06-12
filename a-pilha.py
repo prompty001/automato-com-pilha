@@ -33,14 +33,15 @@ class Automato:
                  
         self.regrasTrans = [RegraTrans(i) for i in regras]
         
-    def analisar(self, estado, palavra, pilha=None):
+    def analisar(self, estado, palavra, pilha=None, estados=None):
         p = Pilha() if pilha is None else pilha
+        estados = [] if estados is None else estados.copy()
         
         # se o estado a ser analisado esta
         # entre os estados finais e a palavra
         # estiver vazia, a palavra eh aceita
         if estado in self.estadosFinais and palavra == '-':
-            yield True
+            yield True, estados
 
         # a variavel indica se alguma regra de
         # transicao foi aceita, caso contrario a
@@ -75,7 +76,7 @@ class Automato:
             if ((cond01 and cond02) and (cond03 and cond04)) or (cond05
                 and (cond06 or cond07) and (cond08 or cond09)):
                 flag = True
-
+                
                 # cria uma nova pilha para ser analisada
                 # na recursao, empilhando ou desempilhando
                 # conforme definido pela regra de transicao
@@ -91,14 +92,19 @@ class Automato:
                 novaPalavra = palavra
                 if regra.simboloLidoPalavra not in ['-', '?']:
                     novaPalavra = palavra[1:] if len(palavra) > 1 else '-'
+
+                estados.append(regra)
                 
-                yield from self.analisar(regra.estadoFinal, novaPalavra, novaPilha)
+                yield from self.analisar(regra.estadoFinal, novaPalavra, novaPilha, estados)
                                         
-        if not flag: yield False
+        if not flag: yield False, []
             
     def verifica(self, palavra):
         for res in self.analisar('q0', palavra):
-            if res: return True
+            if res[0]:
+                for r in res[1]: print(list(vars(r).values()))
+                return True
+            
         return False
             
 class RegraTrans:
@@ -112,13 +118,9 @@ class RegraTrans:
         self.simboloEscritoPilha = regras[4]
 
 def main():
-    import itertools as it
-    
     a = Automato()
-    for i in range(2, 7, 2):
-        for item in it.product('ab', repeat=i):
-            palavra = ''.join(item)
-            if a.verifica(palavra): print("A palavra {} foi aceita.".format(palavra))
-            else: print("A palavra {} foi recusada.".format(palavra))
+    palavra = 'abba'
+    if a.verifica(palavra): print("A palavra '{}' foi aceita.".format(palavra))
+    else: print("A palavra '{}' foi recusada.".format(palavra))
 
 if __name__ == '__main__': main()
