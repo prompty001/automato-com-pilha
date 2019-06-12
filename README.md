@@ -9,23 +9,23 @@ Nesse trabalho, será implementado um software em qualquer linguagem de programa
 
 O arquivo que descreverá o A-Pilha terá a seguinte forma geral descrita abaixo. Na primeira linha serão apresentados os componentes do autômato, a exemplo do que foi apresentado em aula, conforme abaixo:
 
-(∑︀ , Q, 𝛿, q0, F, V)
+    (∑︀ , Q, 𝛿, q0, F, V)
 
 Os componentes serão apresentados como conjuntos. Um exemplo da primeira linha do arquivo seria:
 
-({a, b}, {q0, q1, q2, q3}, D, q0, {q3}, {A, B})
+    ({a, b}, {q0, q1, q2, q3}, D, q0, {q3}, {A, B})
 
 A partir da segunda linha, estarão listadas as regras de transição segundo o esquema:
 
-estado_origem, símbolo_lido_palavra, símbolo_lido_pilha, estado_final, símbolo_escrito_pilha
+    estado_origem, símbolo_lido_palavra, símbolo_lido_pilha, estado_final, símbolo_escrito_pilha
 
 Por exemplo:
 
-q0, a, A, q1, A
-q1, a, A, qf, -
-q0, b, B, q2, B
-q1, b, B, q2, -
-q2, ?, ?, q3, -
+    q0, a, A, q1, A
+    q1, a, A, qf, -
+    q0, b, B, q2, B
+    q1, b, B, q2, -
+    q2, ?, ?, q3, -
 
 Cabe ressaltar que os elementos do trabalho seguirão estritamente o padrão apresentado acima: estados com “q” seguido de números (podem ser dezenas), símbolos com letras, os conjuntos definidos por { e }, o conjunto de regras de produção com “D”, e a separação dos componentes via vírgula e espaço.
 
