@@ -32,3 +32,7 @@ Cabe ressaltar que os elementos do trabalho seguirão estritamente o padrão apr
 Os símbolos exclusivos da pilha serão letras maiúsculas, enquanto símbolos vazios serão representados por “-”. O teste da pilha vazia será indicado pela transição que utiliza “?” para leitura da palavra e pilha, conforme no exemplo anterior.
 
 Após carregar o arquivo com o A-Pilha, o autômato receberá uma palavra e deverá apresentar a ordem de estados processados e o estado da pilha em cada um deles, além de indicar se a palavra foi ou não aceita.
+
+## Código-fonte
+
+
