@@ -5,7 +5,7 @@ Implementação de software para carregar e processar Autômato com Pilha
 
 A-Pilha (Autômato com Pilha) são um tipo de autômato específico para trabalhar com linguagens livres do contexto. Esses autômatos são conhecidos por utilizar uma estrutura auxiliar do tipo pilha para leitura e escrita de dados.
 
-Nesse trabalho, grupos de no máximo 4 alunos implementarão um software em qualquer linguagem de programação para carregar um A-Pilha a partir de um arquivo e em seguida verificar se determinada palavra é aceita ou recusada pelo autômato.
+Nesse trabalho, será implementado um software em qualquer linguagem de programação para carregar um A-Pilha a partir de um arquivo e em seguida verificar se determinada palavra é aceita ou recusada pelo autômato.
 
 O arquivo que descreverá o A-Pilha terá a seguinte forma geral descrita abaixo. Na primeira linha serão apresentados os componentes do autômato, a exemplo do que foi apresentado em aula, conforme abaixo:
 
