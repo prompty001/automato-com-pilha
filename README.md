@@ -47,8 +47,9 @@ Representação da estrutura auxiliar do tipo pilha utilizada pelo autômato.
 
 #### Atributos:
 
-- `pilha`: Uma lista que representa uma pilha. Caso a pilha esteja vazia, possui o valor de `['-']`.
+- `pilha`: Uma lista que representa uma pilha. Uma pilha vazia é representada por `['-']`. O topo da pilha representa o último elemento da lista.
 
-### Métodos:
+#### Métodos:
 
-- `empilha`: Adiciona um elemento no final da 
+- `empilha`: Adiciona um elemento `n` passado como parâmetro no topo da pilha.
+- `desempilha`: Remove o elemento que está no topo da pilha.
