@@ -104,3 +104,168 @@ TBA
 - `analisar`: Analisa uma palavra e pode gerar `True` ou `False` de acordo com os estados percorridos. Possui como parâmetros `estado`, que representa o estado atual em que o autômato se encontra, `palavra`, que representa a palavra atual que está sendo analisada pelo autômato, `pilha`, que representa a condição atual da pilha e `estados`, que representa todos os estados que o autômato já percorreu até o momento atual.
 - `verificar`: Analisa a saída do método `analisar` e retorna `True` caso algum valor gerado pelo método seja `True` (significando que a palavra foi aceita) e retorna `False` caso contrário (significando que a palavra não foi aceita). Também é mostrado ao usuário quais foram os estados percorridos pelo autômato até que a palavra fosse aceita.
 
+### Exemplo de execução
+
+O arquivo abaixo representa um autômato que aceitam palíndromos com número par de digitos.
+
+    ({a, b}, {q0, q1, q2}, D, q0, {q2}, {A, B})
+    q0, a, -, q0, A
+    q0, b, -, q0, B
+    q0, -, -, q1, -
+    q1, a, A, q1, -
+    q1, b, B, q1, -
+    q1, ?, ?, q2, -
+    
+Testando o arquivo com a palavra **abaabb** (possui um número par de dígitos, porém não é um palíndromo):
+
+    >> Insira a palavra para ser analisada pelo autômato: abaabb
+
+    REGRA 1:
+    Estado de origem:      q0
+    Símbolo lido palavra:  a
+    Símbolo lido pilha:    -
+    Estado final:          q0
+    Símbolo escrito pilha: A
+    PILHA: ['A']
+
+    REGRA 2:
+    Estado de origem:      q0
+    Símbolo lido palavra:  b
+    Símbolo lido pilha:    -
+    Estado final:          q0
+    Símbolo escrito pilha: B
+    PILHA: ['A', 'B']
+
+    REGRA 3:
+    Estado de origem:      q0
+    Símbolo lido palavra:  a
+    Símbolo lido pilha:    -
+    Estado final:          q0
+    Símbolo escrito pilha: A
+    PILHA: ['A', 'B', 'A']
+
+    REGRA 4:
+    Estado de origem:      q0
+    Símbolo lido palavra:  a
+    Símbolo lido pilha:    -
+    Estado final:          q0
+    Símbolo escrito pilha: A
+    PILHA: ['A', 'B', 'A', 'A']
+
+    REGRA 5:
+    Estado de origem:      q0
+    Símbolo lido palavra:  b
+    Símbolo lido pilha:    -
+    Estado final:          q0
+    Símbolo escrito pilha: B
+    PILHA: ['A', 'B', 'A', 'A', 'B']
+
+    REGRA 6:
+    Estado de origem:      q0
+    Símbolo lido palavra:  b
+    Símbolo lido pilha:    -
+    Estado final:          q0
+    Símbolo escrito pilha: B
+    PILHA: ['A', 'B', 'A', 'A', 'B', 'B']
+
+    REGRA 7:
+    Estado de origem:      q0
+    Símbolo lido palavra:  -
+    Símbolo lido pilha:    -
+    Estado final:          q1
+    Símbolo escrito pilha: -
+    PILHA: ['A', 'B', 'A', 'A', 'B', 'B']
+
+    A palavra 'abaabb' foi recusada.
+   
+Testando o arquivo com a palavra **aba** (é um palíndromo, porém com número ímpar de dígitos):
+
+    >> Insira a palavra para ser analisada pelo autômato: aba
+
+    REGRA 1:
+    Estado de origem:      q0
+    Símbolo lido palavra:  a
+    Símbolo lido pilha:    -
+    Estado final:          q0
+    Símbolo escrito pilha: A
+    PILHA: ['A']
+
+    REGRA 2:
+    Estado de origem:      q0
+    Símbolo lido palavra:  b
+    Símbolo lido pilha:    -
+    Estado final:          q0
+    Símbolo escrito pilha: B
+    PILHA: ['A', 'B']
+
+    REGRA 3:
+    Estado de origem:      q0
+    Símbolo lido palavra:  a
+    Símbolo lido pilha:    -
+    Estado final:          q0
+    Símbolo escrito pilha: A
+    PILHA: ['A', 'B', 'A']
+
+    REGRA 4:
+    Estado de origem:      q0
+    Símbolo lido palavra:  -
+    Símbolo lido pilha:    -
+    Estado final:          q1
+    Símbolo escrito pilha: -
+    PILHA: ['A', 'B', 'A']
+
+    A palavra 'aba' foi recusada.
+    
+Testando o arquivo com a palavra **abba** (é um palíndromo com número par de dígitos):
+
+    >> Insira a palavra para ser analisada pelo autômato: abba
+
+    REGRA 1:
+    Estado de origem:      q0
+    Símbolo lido palavra:  a
+    Símbolo lido pilha:    -
+    Estado final:          q0
+    Símbolo escrito pilha: A
+    PILHA: ['A']
+
+    REGRA 2:
+    Estado de origem:      q0
+    Símbolo lido palavra:  b
+    Símbolo lido pilha:    -
+    Estado final:          q0
+    Símbolo escrito pilha: B
+    PILHA: ['A', 'B']
+
+    REGRA 3:
+    Estado de origem:      q0
+    Símbolo lido palavra:  -
+    Símbolo lido pilha:    -
+    Estado final:          q1
+    Símbolo escrito pilha: -
+    PILHA: ['A', 'B']
+
+    REGRA 4:
+    Estado de origem:      q1
+    Símbolo lido palavra:  b
+    Símbolo lido pilha:    B
+    Estado final:          q1
+    Símbolo escrito pilha: -
+    PILHA: ['A']
+
+    REGRA 5:
+    Estado de origem:      q1
+    Símbolo lido palavra:  a
+    Símbolo lido pilha:    A
+    Estado final:          q1
+    Símbolo escrito pilha: -
+    PILHA: ['-']
+
+    REGRA 6:
+    Estado de origem:      q1
+    Símbolo lido palavra:  ?
+    Símbolo lido pilha:    ?
+    Estado final:          q2
+    Símbolo escrito pilha: -
+    PILHA: ['-']
+
+    A palavra 'abba' foi aceita.
