@@ -94,14 +94,14 @@ class Automato:
                     novaPalavra = palavra[1:] if len(palavra) > 1 else '-'
 
                 estados.append(regra)
-                
+
                 # caso seja produzido True, o programa para a execução
                 # caso seja produzido False, significa que o último estado
                 # não analisou a palavra com sucesso, portanto terá de ser deletado
                 yield from self.analisar(regra.estadoFinal, novaPalavra, novaPilha, estados)
                 del estados[-1]
                                         
-        if not flag: yield False, []
+        if not flag: yield False, estados
             
     def verifica(self, palavra):
         for res in self.analisar('q0', palavra):
@@ -118,6 +118,23 @@ class Automato:
                     print('PILHA: {}\n'.format(auxPilha.pilha))
                 return True
             
+        # caso o programa alcance esta parte do código,
+        # isso significa que a palavra nao foi aceita.
+        # portanto será mostrado na tela a primeira
+        # ocorrência de falha da palavra no automato
+
+        novosValores = self.analisar('q0', palavra)
+        res = next(novosValores)
+        auxPilha2 = Pilha()
+        for i, regra in enumerate(res[1]):
+            if regra.simboloLidoPilha not in ['-', '?']:
+                auxPilha2.desempilha()
+            if regra.simboloEscritoPilha not in ['-', '?']:
+                auxPilha2.empilha(regra.simboloEscritoPilha)
+                
+            print('REGRA {}:'.format(i+1))
+            regra.printAtributos()
+            print('PILHA: {}\n'.format(auxPilha2.pilha))
         return False
             
 class RegraTrans:
@@ -137,18 +154,17 @@ class RegraTrans:
         print('Estado final:          {}'.format(self.estadoFinal))
         print('Símbolo escrito pilha: {}'.format(self.simboloEscritoPilha))
 
-# gera uma palavra aleatoria usando os caracteres 
-# 'dig' com um comprimento de 'num' caracteres
-def geraPalavra(dig, num):
-    import itertools, random
-    palavras = [''.join(item) for item in itertools.product(dig, repeat=num)]
-    return random.choice(palavras)
-
 def main():
     a = Automato()
-    palavra = 'abba'
-    #palavra = geraPalavra('ab', 4)
-    
+    palavra = input('Insira a palavra para ser analisada pelo autômato: ')
+
+    # verifica se alguma letra na palavra nao esta no
+    # conjunto de simbolos do alfabeto de entrada do automato
+    while not all([letra in a.alfabeto for letra in list(set(palavra))]):
+        print('A palavra possui símbolos que não estão no alfabeto do autômato.')
+        palavra = input('Insira a palavra para ser analisada pelo autômato: ')
+
+    print()
     if a.verifica(palavra): print("A palavra '{}' foi aceita.".format(palavra))
     else: print("A palavra '{}' foi recusada.".format(palavra))
 
