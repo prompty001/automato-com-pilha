@@ -35,4 +35,20 @@ Após carregar o arquivo com o A-Pilha, o autômato receberá uma palavra e deve
 
 ## Código-fonte
 
+O arquivo foi desenvolvido na linguagem Python.
 
+### Classe `Pilha`
+
+Representação da estrutura auxiliar do tipo pilha utilizada pelo autômato.
+
+#### Argumentos:
+
+- `lista`: Primeiro parâmetro. Caso não seja passado, possui valor de `None`.
+
+#### Atributos:
+
+- `pilha`: Uma lista que representa uma pilha. Caso a pilha esteja vazia, possui o valor de `['-']`.
+
+### Métodos:
+
+- `empilha`: Adiciona um elemento no final da 
