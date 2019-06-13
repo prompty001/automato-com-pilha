@@ -37,8 +37,6 @@ Após carregar o arquivo com o A-Pilha, o autômato receberá uma palavra e deve
 
 O arquivo foi desenvolvido na linguagem Python.
 
-------
-
 ### Classe `Pilha`
 
 Representação da estrutura auxiliar do tipo pilha utilizada pelo autômato.
@@ -75,3 +73,31 @@ Representa uma regra de transição do autômato.
 - `simboloEscritoPilha`: Representa o símbolo a ser escrito na pilha.
 
 A execução da regra de transição leva o autômato a consumir o prefixo `simboloLidoPalavra` da entrada, consumir o prefixo `simboloLidoPilha` da pilha, produzir `simboloEscritoPilha` no topo da pilha e passar do estado `estadoOrigem` para o estado `estadoFinal`.
+
+#### Métodos:
+
+- `printAtributos`: Mostra na tela os atributos da regra de transição.
+
+------
+
+### Classe `Automato`
+
+Representa um autômato com pilha.
+
+#### Argumentos:
+
+TBA
+
+#### Atributos:
+
+- `alfabeto`: Representa um conjunto finito de símbolos, denominado alfabeto de entrada.
+- `estados`: Representa um conjunto finito de estados.
+- `simbRegrasTrans`: Representa o símbolo da regra de transição.
+- `estadoInicial`: Representa o estado inicial.
+- `estadosFinais`: Representa o conjunto de estados finais.
+- `alfabetoPilha`: Representa um conjunto finito de símbolos, denominado alfabeto da pilha.
+- `regrasTrans`: Representa uma lista de objetos da classe `RegraTrans`.
+
+#### Métodos:
+
+- `analisar`: Analisa uma p
