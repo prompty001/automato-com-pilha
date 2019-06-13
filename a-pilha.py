@@ -95,6 +95,9 @@ class Automato:
 
                 estados.append(regra)
                 
+                # caso seja produzido True, o programa para a execução
+                # caso seja produzido False, significa que o último estado
+                # não analisou a palavra com sucesso, portanto terá de ser deletado
                 yield from self.analisar(regra.estadoFinal, novaPalavra, novaPilha, estados)
                 del estados[-1]
                                         
