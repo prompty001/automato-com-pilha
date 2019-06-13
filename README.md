@@ -2,6 +2,14 @@
 
 Trabalho de Linguagens Formais, Autômatos e Computabilidade que realiza a simulação de um autômato com pilha.
 
+## Sumário
+1. [Atividade proposta](#atividade-proposta)
+2. [Código-fonte](#código-fonte)
+    1. [Classe `Pilha`](#classe-pilha)
+    2. [Classe `RegraTrans`](#classe-pilha)
+    3. [Classe `Automato`](#classe-pilha)
+3. [Exemplo de execução](#exemplo-de-execução)
+
 ## Atividade proposta
 
 A-Pilha (Autômato com Pilha) são um tipo de autômato específico para trabalhar com linguagens livres do contexto. Esses autômatos são conhecidos por utilizar uma estrutura auxiliar do tipo pilha para leitura e escrita de dados.
@@ -104,7 +112,7 @@ TBA
 - `analisar`: Analisa uma palavra e pode gerar `True` ou `False` de acordo com os estados percorridos. Possui como parâmetros `estado`, que representa o estado atual em que o autômato se encontra, `palavra`, que representa a palavra atual que está sendo analisada pelo autômato, `pilha`, que representa a condição atual da pilha e `estados`, que representa todos os estados que o autômato já percorreu até o momento atual.
 - `verificar`: Analisa a saída do método `analisar` e retorna `True` caso algum valor gerado pelo método seja `True` (significando que a palavra foi aceita) e retorna `False` caso contrário (significando que a palavra não foi aceita). Também é mostrado ao usuário quais foram os estados percorridos pelo autômato até que a palavra fosse aceita.
 
-### Exemplo de execução
+## Exemplo de execução
 
 O arquivo abaixo representa um autômato que aceitam palíndromos com número par de digitos.
 
