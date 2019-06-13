@@ -1,5 +1,6 @@
 # Autômato com Pilha
-Implementação de software para carregar e processar Autômato com Pilha
+
+Trabalho da disciplina de Linguagens Formais, Autômatos e Computabilidade que realiza a simulação de um autômato com pilha.
 
 ## Atividade proposta
 
