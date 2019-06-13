@@ -96,13 +96,23 @@ class Automato:
                 estados.append(regra)
                 
                 yield from self.analisar(regra.estadoFinal, novaPalavra, novaPilha, estados)
+                del estados[-1]
                                         
         if not flag: yield False, []
             
     def verifica(self, palavra):
         for res in self.analisar('q0', palavra):
             if res[0]:
-                for r in res[1]: print(list(vars(r).values()))
+                auxPilha = Pilha()
+                for i, regra in enumerate(res[1]):
+                    if regra.simboloLidoPilha not in ['-', '?']:
+                        auxPilha.desempilha()
+                    if regra.simboloEscritoPilha not in ['-', '?']:
+                        auxPilha.empilha(regra.simboloEscritoPilha)
+                        
+                    print('REGRA {}:'.format(i+1))
+                    regra.printAtributos()
+                    print('PILHA: {}\n'.format(auxPilha.pilha))
                 return True
             
         return False
@@ -117,9 +127,25 @@ class RegraTrans:
         self.estadoFinal = regras[3]
         self.simboloEscritoPilha = regras[4]
 
+    def printAtributos(self):
+        print('Estado de origem:      {}'.format(self.estadoOrigem))
+        print('Símbolo lido palavra:  {}'.format(self.simboloLidoPalavra))
+        print('Símbolo lido pilha:    {}'.format(self.simboloLidoPilha))
+        print('Estado final:          {}'.format(self.estadoFinal))
+        print('Símbolo escrito pilha: {}'.format(self.simboloEscritoPilha))
+
+# gera uma palavra aleatoria usando os caracteres 
+# 'dig' com um comprimento de 'num' caracteres
+def geraPalavra(dig, num):
+    import itertools, random
+    palavras = [''.join(item) for item in itertools.product(dig, repeat=num)]
+    return random.choice(palavras)
+
 def main():
     a = Automato()
     palavra = 'abba'
+    #palavra = geraPalavra('ab', 4)
+    
     if a.verifica(palavra): print("A palavra '{}' foi aceita.".format(palavra))
     else: print("A palavra '{}' foi recusada.".format(palavra))
 
