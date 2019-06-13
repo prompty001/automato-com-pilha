@@ -1,6 +1,6 @@
 # Autômato com Pilha
 
-Trabalho da disciplina de Linguagens Formais, Autômatos e Computabilidade que realiza a simulação de um autômato com pilha.
+Trabalho de Linguagens Formais, Autômatos e Computabilidade que realiza a simulação de um autômato com pilha.
 
 ## Atividade proposta
 
