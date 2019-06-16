@@ -14,23 +14,15 @@ class Pilha:
         else: del self.pilha[-1]
 
 class Automato:
-    def __init__(self):
-        self.alfabeto = ['a', 'b']
-        self.estados = ['q0', 'q1', 'q2']
-        self.simbRegrasTrans = 'D'
-        self.estadoInicial = 'q0' 
-        self.estadosFinais = ['q2']
-        self.alfabetoPilha = ['A', 'B']
-        
-        # regras de transicao que aceitam um
-        # palindromo com um numero par de digitos
-        regras = ['q0, a, -, q0, A',
-                  'q0, b, -, q0, B',
-                  'q0, -, -, q1, -',
-                  'q1, a, A, q1, -',
-                  'q1, b, B, q1, -',
-                  'q1, ?, ?, q2, -']
-                 
+    def __init__(self, componentes, producoes):
+        self.alfabeto = componentes[0]
+        self.estados = componentes[1]
+        self.simbRegrasTrans = componentes[2]
+        self.estadoInicial = componentes[3]
+        self.estadosFinais = componentes[4]
+        self.alfabetoPilha = componentes[5]
+        regras = producoes
+      
         self.regrasTrans = [RegraTrans(i) for i in regras]
         
     def analisar(self, estado, palavra, pilha=None, estados=None):
@@ -119,7 +111,7 @@ class Automato:
                 return True
             
         # caso o programa alcance esta parte do código,
-        # isso significa que a palavra nao foi aceita.
+        # isso significa que a palavra nao foi aceita
         # portanto será mostrado na tela a primeira
         # ocorrência de falha da palavra no automato
 
@@ -154,18 +146,53 @@ class RegraTrans:
         print('Estado final:          {}'.format(self.estadoFinal))
         print('Símbolo escrito pilha: {}'.format(self.simboloEscritoPilha))
 
-def main():
-    a = Automato()
+# lê o arquivo que contém a gramática
+# e as regras de produção do autômato
+def lerArquivo(file):
+    prod = []
+    abrirArquivo = open(file, 'r')
+    gramatica = abrirArquivo.readline()
+    prodAutomato = abrirArquivo.readlines()
+    abrirArquivo.close()
+
+    for elem in range(0, len(prodAutomato)):
+        if elem < len(prodAutomato) - 1:
+            prod += [prodAutomato[elem][:-1]]
+        else:
+            prod += [prodAutomato[elem]]
+
+    gramatica = gramatica[1:-2]
+    gramatica = gramatica.replace('{', '')
+    gramatica = gramatica.replace('}', '')
+    gramatica = gramatica.split(' ')
+    return gramatica, prod
+
+# trata os elementos da gramática
+# (como o conjunto de estados iniciais)
+# para que sejam recebidos na classe autômato
+def tratarS(gram):
+    elements = []
+    for elem in range(0,len(gram)):
+        alfabeto = gram[elem]
+        alfabeto = alfabeto.split(',')
+        if elem < len(gram) -1 :
+            alfabeto = alfabeto[0:-1]
+        elements.extend([alfabeto])
+    return elements
+    
+arquivoAutomato = input('Qual o nome do arquivo? ')
+gramaticaAutomato, producoes = lerArquivo(arquivoAutomato)
+componentes = tratarS(gramaticaAutomato)
+
+a = Automato(componentes, producoes)
+palavra = input('Qual a palavra a ser analisada? ')
+
+# verifica se alguma letra na palavra nao esta no
+# conjunto de simbolos do alfabeto de entrada do automato
+while not all([letra in a.alfabeto for letra in list(set(palavra))]):
+    print('A palavra possui símbolos que não estão no alfabeto do autômato.')
     palavra = input('Insira a palavra para ser analisada pelo autômato: ')
 
-    # verifica se alguma letra na palavra nao esta no
-    # conjunto de simbolos do alfabeto de entrada do automato
-    while not all([letra in a.alfabeto for letra in list(set(palavra))]):
-        print('A palavra possui símbolos que não estão no alfabeto do autômato.')
-        palavra = input('Insira a palavra para ser analisada pelo autômato: ')
-
-    print()
-    if a.verifica(palavra): print("A palavra '{}' foi aceita.".format(palavra))
-    else: print("A palavra '{}' foi recusada.".format(palavra))
-
-if __name__ == '__main__': main()
+print()
+if a.verifica(palavra): print("A palavra '{}' foi aceita.".format(palavra))
+else: print("A palavra '{}' foi recusada.".format(palavra))
