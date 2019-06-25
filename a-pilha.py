@@ -164,29 +164,40 @@ def lerArquivo(file):
     gramatica = gramatica[1:-2]
     gramatica = gramatica.replace('{', '')
     gramatica = gramatica.replace('}', '')
-    gramatica = gramatica.split(' ')
+    gramatica = gramatica.split(', ')
     return gramatica, prod
 
 # trata os elementos da gramática
 # (como o conjunto de estados iniciais)
 # para que sejam recebidos na classe autômato
 def tratarS(gram):
-    elements = []
-    for elem in range(0,len(gram)):
-        alfabeto = gram[elem]
-        alfabeto = alfabeto.split(',')
-        if elem < len(gram) -1 :
-            alfabeto = alfabeto[0:-1]
-        elements.extend([alfabeto])
-    return elements
-    
+    alf = []; est = []; est_finais = []; L1 = []; comp = []
+    elem = 0
+    while gram != []:
+        gram[elem] = str(gram[elem])
+        if len(gram[elem]) == 1 and (gram[elem].islower() or gram[elem].isnumeric()):
+            alf += [gram[elem]]
+        if len(gram[elem]) == 2:
+            if gram[elem] not in est:
+                est += [gram[elem]]
+            else:
+                est_finais += [gram[elem]]
+        if gram[elem].isupper():
+            L1 += [gram[elem]]
+            if elem + 1 < len(gram):
+                L1 += [gram[elem + 1]]
+                gram.pop(elem + 1)
+        gram.pop(elem)
+    comp += [alf, est, L1[0], L1[1], est_finais, L1[2:len(L1)]]
+    return comp
+
 arquivoAutomato = input('Qual o nome do arquivo? ')
 gramaticaAutomato, producoes = lerArquivo(arquivoAutomato)
 componentes = tratarS(gramaticaAutomato)
 
 a = Automato(componentes, producoes)
 palavra = input('Qual a palavra a ser analisada? ')
-
+print(a.alfabeto)
 # verifica se alguma letra na palavra nao esta no
 # conjunto de simbolos do alfabeto de entrada do automato
 while not all([letra in a.alfabeto for letra in list(set(palavra))]):
