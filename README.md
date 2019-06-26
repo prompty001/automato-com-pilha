@@ -18,7 +18,7 @@ Nesse trabalho, será implementado um software em qualquer linguagem de programa
 
 O arquivo que descreverá o A-Pilha terá a seguinte forma geral descrita abaixo. Na primeira linha serão apresentados os componentes do autômato, a exemplo do que foi apresentado em aula, conforme abaixo:
 
-    (∑︀ , Q, 𝛿, q0, F, V)
+    (∑︀, Q, 𝛿, q0, F, V)
 
 Os componentes serão apresentados como conjuntos. Um exemplo da primeira linha do arquivo seria:
 
@@ -95,7 +95,8 @@ Representa um autômato com pilha.
 
 #### Argumentos:
 
-TBA
+- `componentes`: Representa a primeira linha do arquivo em forma de lista, onde cada elemento é um conjunto.
+- `regras`: Representa as linhas restantes do arquivo em forma de string.
 
 #### Atributos:
 
@@ -111,6 +112,13 @@ TBA
 
 - `analisar`: Analisa uma palavra e pode gerar `True` ou `False` de acordo com os estados percorridos. Possui como parâmetros `estado`, que representa o estado atual em que o autômato se encontra, `palavra`, que representa a palavra atual que está sendo analisada pelo autômato, `pilha`, que representa a condição atual da pilha e `estados`, que representa todos os estados que o autômato já percorreu até o momento atual.
 - `verificar`: Analisa a saída do método `analisar` e retorna `True` caso algum valor gerado pelo método seja `True` (significando que a palavra foi aceita) e retorna `False` caso contrário (significando que a palavra não foi aceita). Também é mostrado ao usuário quais foram os estados percorridos pelo autômato até que a palavra fosse aceita.
+
+------
+
+### Função `lerArquivo`
+
+    A SER ADICIONADO
+
 
 ## Exemplo de execução
 
